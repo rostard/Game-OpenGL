@@ -3,7 +3,7 @@ project(Game-OpenGL)
 
 set(SOURCE_FILES main.cpp glad.c font.h shader.h shader.cpp stb_image.h stb_image.cpp game.h game.cpp)
 
-add_executable(${PROJECT_NAME} ${PROJECT_SOURCE_DIR}/${SOURCE_FILES} texture.cpp texture.h)
+add_executable(${PROJECT_NAME} ${PROJECT_SOURCE_DIR}/${SOURCE_FILES} texture.cpp texture.h resource_mager.cpp resource_mager.h)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
 

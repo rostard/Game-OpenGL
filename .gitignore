@@ -37,3 +37,9 @@ cmake-build-debug/cmake_install.cmake
 cmake-build-debug/configuration/root_directory.h
 configuration/root_directory.h
 glad.c
+.idea/Game-OpenGL.iml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+.idea/workspace.xml
+cmake-build-debug/Project.cbp

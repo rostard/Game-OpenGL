@@ -3,6 +3,7 @@
 //
 
 #include <glad/glad.h>
+#include <iostream>
 #include "game.h"
 
 Game::Game(GLint width, GLint height) {

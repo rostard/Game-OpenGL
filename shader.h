@@ -19,7 +19,7 @@ public:
     unsigned int ID;
 
     // constructor reads and builds the shader
-    Shader();
+    Shader() = default;
     // use/activate the shader
     Shader& use();
 

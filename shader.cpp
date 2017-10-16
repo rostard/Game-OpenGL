@@ -10,7 +10,6 @@ void Shader::Compile(const GLchar *vertexSource, const GLchar *fragmentSource, c
 
 
     GLuint vertex, fragment, geometry;
-
     // vertex Shader
     vertex = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(vertex, 1, &vertexSource, NULL);
@@ -25,7 +24,7 @@ void Shader::Compile(const GLchar *vertexSource, const GLchar *fragmentSource, c
     // print compile errors if any
     CheckCompileErrors(fragment, "FRAGMENT");
 
-    if(geometrySource != NULL){
+    if(geometrySource){
         // geometry Shader
         fragment = glCreateShader(GL_GEOMETRY_SHADER);
         glShaderSource(geometry, 1, &geometrySource, NULL);
@@ -37,7 +36,7 @@ void Shader::Compile(const GLchar *vertexSource, const GLchar *fragmentSource, c
     this->ID = glCreateProgram();
     glAttachShader(this->ID, vertex);
     glAttachShader(this->ID, fragment);
-    if (geometrySource != NULL){
+    if (geometrySource){
         glAttachShader(this->ID, geometry);
     }
     glLinkProgram(this->ID);
@@ -46,7 +45,7 @@ void Shader::Compile(const GLchar *vertexSource, const GLchar *fragmentSource, c
     // delete the shaders as they're linked into our program now and no longer necessery
     glDeleteShader(vertex);
     glDeleteShader(fragment);
-    if (geometrySource != NULL){
+    if (geometrySource != nullptr){
         glDeleteShader(geometry);
     }
 }

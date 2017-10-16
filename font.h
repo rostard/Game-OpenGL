@@ -13,6 +13,7 @@
 
 
 #include "shader.h"
+#include "resource_mager.h"
 
 
 struct Character{
@@ -25,23 +26,17 @@ struct Character{
 class Font{
 public:
     Font(){
-        shader = new Shader();
-        shader->Compile("shaders/font.vs.glsl", "shaders/font.fs.glsl");
+        shader = ResourceManager::LoadShader("shaders/font.vs.glsl", "shaders/font.fs.glsl", nullptr, "font");
         InitBuffers();
     }
     Font(const char* filename){
-        shader = new Shader();
-        shader->Compile("shaders/font.vs.glsl", "shaders/font.fs.glsl");
+        shader = ResourceManager::LoadShader("shaders/font.vs.glsl", "shaders/font.fs.glsl", nullptr, "font");
         LoadFont(filename);
         InitBuffers();
     }
-    ~Font(){
-        delete(shader);
-    }
     void LoadShader(const char* vertexShader, const char* fragmentShader){
-        if(shader != NULL)delete(shader);
-        shader = new Shader();
-        shader->Compile(vertexShader, fragmentShader);
+
+        shader = ResourceManager::LoadShader(vertexShader, fragmentShader, nullptr, "font");
     }
     void LoadFont(const char* filename);
     void InitBuffers();
@@ -49,7 +44,7 @@ public:
 
 private:
     GLuint VBO, VAO;
-    Shader* shader;
+    Shader shader;
     std::map<GLchar, Character> Characters;
     FT_Face face;
 };
@@ -115,10 +110,10 @@ void Font::RenderText(std::string text, GLfloat x, GLfloat y, GLfloat scale, glm
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glm::mat4 projection = glm::ortho(0.0f, 800.0f, 0.0f, 600.0f);
-    shader->use();
-    shader->setVec3("color", color);
-    shader->setInt("text", 0);
-    shader->setMat4("projection", projection);
+    shader.use();
+    shader.setVec3("color", color);
+    shader.setInt("text", 0);
+    shader.setMat4("projection", projection);
     glActiveTexture(GL_TEXTURE0);
     glBindVertexArray(VAO);
 
