@@ -2,7 +2,7 @@
 // Created by rostard on 16.10.17.
 //
 
-#include "resource_mager.h"
+#include "resource_manager.h"
 #include "stb_image.h"
 
 
@@ -10,21 +10,21 @@ std::map<std::string, Texture2D>    ResourceManager::Textures;
 std::map<std::string, Shader>       ResourceManager::Shaders;
 
 
-Shader ResourceManager::LoadShader(const GLchar *vShaderFile, const GLchar *fShaderFile, const GLchar *gShaderFile, std::string name) {
+Shader& ResourceManager::LoadShader(const GLchar *vShaderFile, const GLchar *fShaderFile, const GLchar *gShaderFile, std::string name) {
     Shaders[name] = loadShaderFromFile(vShaderFile, fShaderFile, gShaderFile);
     return Shaders[name];
 }
 
-Shader ResourceManager::GetShader(std::string name) {
+Shader& ResourceManager::GetShader(std::string name) {
     return Shaders[name];
 }
 
-Texture2D ResourceManager::LoadTexture(const GLchar *file, GLboolean alpha, std::string name) {
+Texture2D& ResourceManager::LoadTexture(const GLchar *file, GLboolean alpha, std::string name) {
     Textures[name] = loadTextureFromFile(file, alpha);
     return Textures[name];
 }
 
-Texture2D ResourceManager::GetTexture(std::string name) {
+Texture2D& ResourceManager::GetTexture(std::string name) {
     return Textures[name];
 }
 
@@ -85,6 +85,9 @@ Texture2D ResourceManager::loadTextureFromFile(const GLchar *file, GLboolean alp
     int width, height;
 
     unsigned char* image = stbi_load(file, &width, &height, nullptr, alpha ? 4 : 3);
+    if(!image){
+        std::cerr<<"error loading image path: "<<file<<std::endl;
+    }
 
     texture.Generate(width, height, image);
     stbi_image_free(image);
