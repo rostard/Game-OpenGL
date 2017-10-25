@@ -13,7 +13,7 @@
 
 
 #include "shader.h"
-#include "resource_mager.h"
+#include "resource_manager.h"
 
 
 struct Character{
@@ -150,7 +150,7 @@ void Font::RenderText(std::string text, GLfloat x, GLfloat y, GLfloat scale, glm
 
     glBindVertexArray(0);
     glBindTexture(GL_TEXTURE_2D, 0);
-    glEnable(GL_DEPTH_TEST);
+    //glEnable(GL_DEPTH_TEST);
 }
 
 #endif //OPENGL_GLFW_FONT_H

@@ -6,6 +6,8 @@
 #define GAME_OPENGL_GAME_H
 
 #include <glad/glad.h>
+#include "sprite_renderer.h"
+#include "GameObject.h"
 
 enum GameState {
     GAME_ACTIVE,
@@ -27,6 +29,10 @@ public:
     void ProcessInput(GLfloat dt);
     void Update(GLfloat dt);
     void Render();
+    SpriteRenderer* Renderer;
+
+    glm::vec2 ownPos = glm::vec2(0.0f, 0.0f);
+    glm::vec2 secondPos = glm::vec2(0.0f, 0.0f);
 };
 
 
